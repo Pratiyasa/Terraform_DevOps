@@ -1,12 +1,11 @@
-sudo useradd -m -s /bin/bash terraform
+# Install required packages
+sudo dnf install -y dnf-plugins-core
 
-echo "terraform ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/terraform
-sudo chmod 440 /etc/sudoers.d/terraform
+# Add HashiCorp repository
+sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 
-sudo visudo -c
+# Install Terraform
+sudo dnf install -y terraform
 
-sudo su - terraform
-
-sudo dnf install -y awscli
-
-aws --version
+# Verify installation
+terraform version
